@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:id="@+id/designlayout"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/calender"/>
+
+        <TextView
+            android:id="@+id/designtxt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="10-20-1999"
+            android:textColor="#111"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:fontFamily="@font/big_shoulders_stencil_display_black"/>
+</LinearLayout>

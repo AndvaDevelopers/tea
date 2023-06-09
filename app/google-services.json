@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "996828887698",
+    "project_id": "tea-project-66ac6",
+    "storage_bucket": "tea-project-66ac6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996828887698:android:9336e04a2786319e5f444b",
+        "android_client_info": {
+          "package_name": "com.example.tea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "996828887698-d7irtie3jta57ssd3hlimmtqhe8hniuh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDB062tNo0tkEAIttGX72SJ0rFSQ3W2_9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "996828887698-d7irtie3jta57ssd3hlimmtqhe8hniuh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
