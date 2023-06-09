@@ -13,5 +13,4 @@
         android:divider="#111"
         android:dividerHeight="2dp"/>
 
-
 </LinearLayout>
