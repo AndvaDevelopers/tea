@@ -1,9 +1,15 @@
 package com.example.tea
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +29,7 @@ class HistroyPage : AppCompatActivity() {
     lateinit var pass:String
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_histroy_page)
@@ -63,65 +70,68 @@ class HistroyPage : AppCompatActivity() {
         })
         hislist.setOnItemClickListener { parent, view, position, id ->
 
-            var d=sets.elementAt(position)
-            var mrngitem:String
-            var mrngamt:String
-            var mrngpaidamt:String
-            var evngitem:String
-            var evngamt:String
-            var evngpaidamt:String
-            var mrng:String=""
-            var evng:String=""
+            var d = sets.elementAt(position)
+            var mrngitem: String
+            var mrngamt: String
+            var mrngpaidamt: String
+            var evngitem: String
+            var evngamt: String
+            var evngpaidamt: String
+            var mrng: String = ""
+            var evng: String = ""
 
-            Toast.makeText(applicationContext,d,Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, d, Toast.LENGTH_LONG).show()
 
-            var df1:DatabaseReference=FirebaseDatabase.getInstance().getReference("Tea").child("SnackDetailsDate").child(pass).child(d)
+            var df1: DatabaseReference =
+                FirebaseDatabase.getInstance().getReference("Tea").child("SnackDetailsDate")
+                    .child(pass).child(d)
 
-            df1.addValueEventListener(object :ValueEventListener
-            {
+            df1.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
-                    if (snapshot.child("Morning").exists())
-                    {
-                        mrngitem=snapshot.child("Morning").child("items").value.toString()
-                        mrngamt=snapshot.child("Morning").child("purchaseAmount").value.toString()
-                        mrngpaidamt=snapshot.child("Morning").child("paidAmount").value.toString()
+                    if (snapshot.child("Morning").exists()) {
+                        mrngitem = snapshot.child("Morning").child("items").value.toString()
+                        mrngamt = snapshot.child("Morning").child("purchaseAmount").value.toString()
+                        mrngpaidamt = snapshot.child("Morning").child("paidAmount").value.toString()
 
-                         mrng="Morning : \nItem : "+mrngitem+"\nAmount : "+mrngamt+"rs\nPaid : "+mrngpaidamt+"rs"
-                        Toast.makeText(applicationContext,mrng,Toast.LENGTH_LONG).show()
+                        mrng =
+                            "Morning : \nItem : " + mrngitem + "\nAmount : " + mrngamt + "rs\nPaid : " + mrngpaidamt + "rs"
+                        Toast.makeText(applicationContext, mrng, Toast.LENGTH_LONG).show()
 
 
-                    }
-                    else
-                    {
-                        mrng="Morning : \nItem : -\nAmount : 0rs\nPaid : 0rs"
-                        Toast.makeText(applicationContext,mrng,Toast.LENGTH_LONG).show()
+                    } else {
+                        mrng = "Morning : \nItem : -\nAmount : 0rs\nPaid : 0rs"
+                        Toast.makeText(applicationContext, mrng, Toast.LENGTH_LONG).show()
 
                     }
 
-                    if (snapshot.child("Evening").exists())
-                    {
-                        evngitem=snapshot.child("Evening").child("items").value.toString()
-                        evngamt=snapshot.child("Evening").child("purchaseAmount").value.toString()
-                        evngpaidamt=snapshot.child("Evening").child("paidAmount").value.toString()
+                    if (snapshot.child("Evening").exists()) {
+                        evngitem = snapshot.child("Evening").child("items").value.toString()
+                        evngamt = snapshot.child("Evening").child("purchaseAmount").value.toString()
+                        evngpaidamt = snapshot.child("Evening").child("paidAmount").value.toString()
 
-                        evng="Morning : \nItem : "+evngitem+"\nAmount : "+evngamt+"rs\nPaid : "+evngpaidamt+"rs"
+                        evng =
+                            "Morning : \nItem : " + evngitem + "\nAmount : " + evngamt + "rs\nPaid : " + evngpaidamt + "rs"
 
-                    }
-                    else
-                    {
-                        evng="Morning : \nItem : -\nAmount : 0rs\nPaid : 0rs"
+                    } else {
+                        evng = "Morning : \nItem : -\nAmount : 0rs\nPaid : 0rs"
 
                     }
-                    var builder= AlertDialog.Builder(applicationContext)
-                    builder.setTitle("Your Information!!!").setMessage(mrng)
-                        .setIcon(R.drawable.ic_launcher_background)
-                        .setCancelable(true)
+                    val li = LayoutInflater.from(applicationContext)
+                    val promptsView: View = li.inflate(R.layout.alertdesign, null)
 
-                    builder.setPositiveButton("Done"){ dialoginterface,which->
+                    val alertDialogBuilder = android.app.AlertDialog.Builder(applicationContext)
+                    val userInput1 = promptsView.findViewById<View>(R.id.inputtype1) as TextView
+
+                    val alert = android.app.AlertDialog.Builder(this@HistroyPage)
+                    alert.setView(promptsView)
+                    alert.setCancelable(true)
+
+                    userInput1.setText(mrng+"/n"+evng)
+                    alert.setPositiveButton("Done") { dialoginterface, which ->
 
                     }
-                    builder.show()
+                    alert.show()
                 }
 
                 override fun onCancelled(error: DatabaseError) {
