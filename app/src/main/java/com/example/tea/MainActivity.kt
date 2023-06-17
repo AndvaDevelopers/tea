@@ -1,5 +1,6 @@
 package com.example.tea
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,5 +19,8 @@ class MainActivity : AppCompatActivity() {
             val ik=Intent(applicationContext,MainLogin::class.java)
             startActivity(ik)
         }, 3000)
+
+
+
     }
 }
